@@ -1,0 +1,20 @@
+[
+    {
+        "username":"Kohir",
+        "password":"123456",
+        "firstName":"Kohir",
+        "lastName":"Dakkochan",
+        "picturePath":"",
+        "ZoaAddress":"random",
+        "userEmail":"kohir_dakochan@domain.com"
+    },
+    {
+        "username":"Feri",
+        "password":"qwerty",
+        "firstName":"Feri",
+        "lastName":"Cbus",
+        "picturePath":"",
+        "ZoaAddress":"shuffled",
+        "userEmail":"ferife@domain.com"
+    }
+]
