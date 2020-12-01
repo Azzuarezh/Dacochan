@@ -4,7 +4,7 @@ export const stateConditionString = state => {
     if (state.isLoading) {
         navigateTo = 'LOAD_APP';
     }
-    if (state.isSignedIn && state.userToken && state.isSignedUp) {
+    if (state.isSignedIn && state.userToken) {
         navigateTo = 'LOAD_HOME';
     }
     if (!state.isSignedUp && state.noAccount) {

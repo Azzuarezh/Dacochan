@@ -5,7 +5,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import { AppLoading} from "expo";
 import * as Font from 'expo-font';
 
-const HeaderX = (props)=> {
+export default HeaderSearch = (props)=> {
 
 useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
@@ -30,32 +30,16 @@ useEffect(() => {
   return (
         <Header style={[styles.container, props.style]}>
           <Left style={styles.group}>
-            <Button transparent>
-              <Icon name={props.icon2Name || "dehaze"} style={styles.icon3}></Icon>
-            </Button>
           </Left>
           <Body>
             <Title style={styles.logoHeader}>Dacochan</Title>
           </Body>
           <Right>
           <Button transparent>
-              <Icon name={props.icon2Name || "notifications"} style={styles.icon3}></Icon>
+              <Icon name={props.icon2Name || "search"} style={styles.icon3}></Icon>
             </Button>
           </Right>
         </Header>
-
-    // <View style={[styles.container, props.style]}>
-    //   <View style={styles.group}>
-    //     <View style={styles.logoHeaderFiller}></View>
-    //     <TouchableOpacity /* Conditional navigation not supported at the moment */
-    //       onPress={() => console.log("Navigate to Settings")}
-    //       style={styles.group2}
-    //     >
-    //       <Icon name={props.icon2Name || "dehaze"} style={styles.icon3}></Icon>
-    //     </TouchableOpacity>
-    //     <Text>Dacochan</Text>
-    //   </View>
-    // </View>
   );
 }
 
@@ -89,5 +73,3 @@ const styles = StyleSheet.create({
     fontSize: 25
   },
 });
-
-export default HeaderX;

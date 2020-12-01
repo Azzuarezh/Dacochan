@@ -22,7 +22,6 @@ import History from "./src/screens/History";
 // import Login from "./src/screens/Login";
 // import PreProcessLiquidate from "./src/screens/PreProcessLiquidate";
 // import PreProcessTopup from "./src/screens/PreProcessTopup";
-// import QrCode from "./src/screens/QrCode";
 // import Settings from "./src/screens/Settings";
 // import SignUp from "./src/screens/SignUp";
 // import Topup from "./src/screens/Topup";

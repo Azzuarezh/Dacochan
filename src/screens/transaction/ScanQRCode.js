@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect,Component } from "react";
 import {
   StyleSheet,
   View,
@@ -7,24 +7,27 @@ import {
   Text,
   Image
 } from "react-native";
-import HeaderX from "../components/HeaderX";
+import HeaderNoIcon from "../../components/HeaderNoIcon";
 
-function QrCode(props) {
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+export default ScanQRCode = ({route,navigation}) => {
   return (
     <View style={styles.root}>
       <StatusBar barStyle="light-content" backgroundColor="rgba(0,0,0,0)" />
-      <HeaderX style={styles.headerX}></HeaderX>
+      <HeaderNoIcon style={styles.headerX}></HeaderNoIcon>
       <View gradientImage="Gradient_xjVvfkX.png" style={styles.body}>
         <View style={styles.background}>
           <ImageBackground
             style={styles.rect7}
             imageStyle={styles.rect7_imageStyle}
-            source={require("../assets/images/Gradient_RQqIPyz.png")}
+            source={require("../../assets/images/Gradient_RQqIPyz.png")}
           >
             <View style={styles.qrCodeBox}>
               <Text style={styles.yourQrCode}>YOUR QR CODE</Text>
               <Image
-                source={require("../assets/images/zotova2.jpg")}
+                source={require("../../assets/images/zotova2.jpg")}
                 resizeMode="contain"
                 style={styles.image}
               ></Image>
@@ -90,5 +93,3 @@ const styles = StyleSheet.create({
     alignSelf: "center"
   }
 });
-
-export default QrCode;

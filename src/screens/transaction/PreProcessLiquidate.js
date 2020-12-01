@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect,Component } from "react";
 import {
   StyleSheet,
   View,
@@ -6,9 +6,12 @@ import {
   ImageBackground,
   Text
 } from "react-native";
-import MaterialSpinner from "../components/MaterialSpinner";
+import MaterialSpinner from "../../components/MaterialSpinner";
 
-function PreProcessLiquidate(props) {
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+export default PreProcessLiquidate = ({route, navigation}) => {
   return (
     <View style={styles.root}>
       <StatusBar barStyle="light-content" backgroundColor="rgba(0,0,0,0)" />
@@ -17,7 +20,7 @@ function PreProcessLiquidate(props) {
           <ImageBackground
             style={styles.rect7}
             imageStyle={styles.rect7_imageStyle}
-            source={require("../assets/images/Gradient_RQqIPyz.png")}
+            source={require(".../../assets/images/Gradient_RQqIPyz.png")}
           >
             <View style={styles.preLiquidateBox}>
               <Text style={styles.verify}>
@@ -77,5 +80,3 @@ const styles = StyleSheet.create({
     marginLeft: 108
   }
 });
-
-export default PreProcessLiquidate;

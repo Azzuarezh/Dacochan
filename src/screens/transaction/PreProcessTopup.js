@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect,Component } from "react";
 import {
   StyleSheet,
   View,
@@ -6,9 +6,9 @@ import {
   ImageBackground,
   Text
 } from "react-native";
-import MaterialButtonPurple from "../components/MaterialButtonPurple";
+import MaterialButtonPurple from "../../components/MaterialButtonPurple";
 
-function PreProcessTopup(props) {
+export default PreProcessTopup = (props) => {
   return (
     <View style={styles.root}>
       <StatusBar barStyle="light-content" backgroundColor="rgba(0,0,0,0)" />
@@ -18,7 +18,7 @@ function PreProcessTopup(props) {
             <ImageBackground
               style={styles.rect7}
               imageStyle={styles.rect7_imageStyle}
-              source={require("../assets/images/Gradient_RQqIPyz.png")}
+              source={require("../../assets/images/Gradient_RQqIPyz.png")}
             ></ImageBackground>
           </View>
           <View style={styles.preLiquidateBox}>
@@ -118,4 +118,3 @@ const styles = StyleSheet.create({
   }
 });
 
-export default PreProcessTopup;

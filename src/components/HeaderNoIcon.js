@@ -5,7 +5,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import { AppLoading} from "expo";
 import * as Font from 'expo-font';
 
-const HeaderX = (props)=> {
+const HeaderNoIcon = (props)=> {
 
 useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
@@ -30,17 +30,11 @@ useEffect(() => {
   return (
         <Header style={[styles.container, props.style]}>
           <Left style={styles.group}>
-            <Button transparent>
-              <Icon name={props.icon2Name || "dehaze"} style={styles.icon3}></Icon>
-            </Button>
           </Left>
           <Body>
             <Title style={styles.logoHeader}>Dacochan</Title>
           </Body>
           <Right>
-          <Button transparent>
-              <Icon name={props.icon2Name || "notifications"} style={styles.icon3}></Icon>
-            </Button>
           </Right>
         </Header>
 
@@ -90,4 +84,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HeaderX;
+export default HeaderNoIcon;

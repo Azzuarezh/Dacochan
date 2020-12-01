@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,useState,useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -10,10 +10,46 @@ import {
 } from "react-native";
 import HeaderX from "../components/HeaderX";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
-function Dashboard({route, navigation}) {
+export default Dashboard = ({route, navigation}) => {  
+
+  const [userData, setUserData] = useState({});    
+  useEffect(() => {
+    // Fetch the token from storage then navigate to our appropriate place
+
+    const bootstrapAsync = async () => {
+      try {
+       
+        tokenFromAsyncStorage = await AsyncStorage.getItem('userToken');
+        sessionJson = await AsyncStorage.getItem("@Wallet:session")
+        console.log('stringJSON : ',sessionJson)
+        session = await JSON.parse(sessionJson)
+        sessionObj = session[0];
+        
+        if(sessionObj !== null){
+          console.log('not null dude')
+          console.log('session dashboard obj: ', sessionObj)
+          setUserData(sessionObj)
+          console.log('userdata bootstrap 432: ',userData)
+        }
+      } catch (e) {
+        // Restoring token failed
+        console.log('error restore token: ', e)
+      }
+      //dispatch({type: 'RESTORE_TOKEN', token: userToken});
+      
+
+    };
+    bootstrapAsync();
+  }, []);
+
+
+
   return (
     <View style={styles.root}>
       <StatusBar barStyle="light-content" backgroundColor="rgba(0,0,0,0)" />
@@ -28,7 +64,7 @@ function Dashboard({route, navigation}) {
               imageStyle={styles.image_imageStyle}
             >
               <View style={styles.overlay}>
-                <Text style={styles.welcome_Banner}>WELCOME User</Text>
+                <Text style={styles.welcome_Banner}>WELCOME {userData.firstName} {userData.lastName}</Text>
                 <Text style={styles.amount}>&lt;Amount&gt; ZOA</Text>
               </View>
             </ImageBackground>
@@ -234,5 +270,3 @@ const styles = StyleSheet.create({
     marginBottom: 71
   }
 });
-
-export default Dashboard;

@@ -7,18 +7,16 @@ import {
   Text,
   ScrollView
 } from "react-native";
-import HeaderX from "../components/HeaderX";
+import HeaderNoIcon from "../components/HeaderNoIcon";
 import ScrollViewEntry from "../components/ScrollViewEntry";
 
 function History(props) {
   return (
     <View style={styles.root}>
       <StatusBar barStyle="light-content" backgroundColor="rgba(0,0,0,0)" />
-      <HeaderX
-        icon2Family="Feather"
-        icon2Name="search"
+      <HeaderNoIcon
         style={styles.headerX}
-      ></HeaderX>
+      ></HeaderNoIcon>
       <View style={styles.bodyStack}>
         <View style={styles.body}>
           <View style={styles.tabs}>

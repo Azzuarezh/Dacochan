@@ -1,4 +1,4 @@
-import React, { useState,useEffect, useContext,useMemo, useReducer } from "react";
+import React, { useState, useEffect , useMemo, useReducer } from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -59,6 +59,7 @@ export default App = ({route, navigation}) =>{
         }
       } catch (e) {
         // Restoring token failed
+        console.err('error restore token: ', e)
       }
       //dispatch({type: 'RESTORE_TOKEN', token: userToken});
      
@@ -123,6 +124,10 @@ export default App = ({route, navigation}) =>{
           dispatch({type: 'TO_SIGNUP_PAGE'});
         }
       },
+      getHomeData: async() => {
+          dispatch({type:'SIGNED_IN'})
+          return state
+      }
     }),
     [],
   );

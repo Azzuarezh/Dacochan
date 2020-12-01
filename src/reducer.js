@@ -23,7 +23,6 @@ export const reducer = (prevState, action) => {
         return {
           ...prevState,
           isSignedIn: true,
-          isSignedUp: true,
           userToken: action.token,
           userData: action.data,
           isLoading: false,
@@ -31,8 +30,16 @@ export const reducer = (prevState, action) => {
       case 'SIGNED_UP':
         return {
           ...prevState,
-          isSignedIn: true,
+          isSignedIn: false,
           isSignedUp: true,
+          isLoading: false,
+          userToken: null,
+          userData: null,
+        };
+      case 'SIGNED_IN':
+        return {
+          ...prevState,
+          isSignedIn: true,
           isLoading: false,
           userToken: null,
           userData: null,
