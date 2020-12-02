@@ -13,7 +13,6 @@ import EntypoIcon from "react-native-vector-icons/Entypo";
 import EvilIconsIcon from "react-native-vector-icons/EvilIcons";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import IoniconsIcon from "react-native-vector-icons/Ionicons";
-
 import * as Font from 'expo-font';
 
 import { NavigationContainer } from '@react-navigation/native';
@@ -21,7 +20,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import { Icon, Picker, Form } from "native-base";
 
-export default Topup = (props,{route,navigation}) => {
+import PreProcessTopup from "./PreProcessTopup";
+
+export default Topup = ({route,navigation}) => {
 const [selected,setSelected] = useState('');
 useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
@@ -125,6 +126,7 @@ useEffect(() => {
                 <IoniconsIcon
                 name="md-arrow-forward"
                 style={styles.icon5}
+                onPress={() => navigation.navigate('PreProcessTopup')}
                 ></IoniconsIcon>
             </View>
           </ImageBackground>

@@ -7,8 +7,10 @@ import {
   Text
 } from "react-native";
 import MaterialButtonPurple from "../../components/MaterialButtonPurple";
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default PreProcessTopup = (props) => {
+export default PreProcessTopup = ({route,navigation}) => {
   return (
     <View style={styles.root}>
       <StatusBar barStyle="light-content" backgroundColor="rgba(0,0,0,0)" />

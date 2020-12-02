@@ -1,11 +1,28 @@
 import React, { useEffect ,Component } from "react";
-import { StyleSheet, View, TouchableOpacity,Text } from "react-native";
+import { StyleSheet, View, TouchableOpacity,Text, Alert } from "react-native";
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { AppLoading} from "expo";
 import * as Font from 'expo-font';
 
 const HeaderX = (props)=> {
+
+const ConfirmLogout = () =>
+    Alert.alert(
+      "Logout",
+      "Are You Sure Want to log out?",
+      [
+        {
+          text: "No",
+          onPress: () => console.log("No Pressed"),
+          style: "cancel"
+        },
+        { text: "Yes", onPress: () => console.log("Yes Pressed") }
+      ],
+      { cancelable: false }
+    );
+
 
 useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
@@ -38,7 +55,10 @@ useEffect(() => {
             <Title style={styles.logoHeader}>Dacochan</Title>
           </Body>
           <Right>
-          <Button transparent>
+           <Button transparent>
+             <MaterialCommunityIcons name="logout" style={styles.icon3} onPress={ConfirmLogout}/>
+            </Button>
+            <Button transparent>
               <Icon name={props.icon2Name || "notifications"} style={styles.icon3}></Icon>
             </Button>
           </Right>
