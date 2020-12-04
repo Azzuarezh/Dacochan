@@ -1,7 +1,8 @@
 export const reducer = (prevState, action) => {
+  console.log(',,,,,,,,,,,,,,,,,,,,,,,,')
+  console.log('Previous State :', prevState)
   console.log('action :', action)
-  console.log('tuken: ', action.token)
-  console.log('duta: ', action.data)
+  console.log(',,,,,,,,,,,,,,,,,,,,,,,,')
     switch (action.type) {
       case 'TO_SIGNUP_PAGE':
         return {
@@ -17,6 +18,14 @@ export const reducer = (prevState, action) => {
           isLoading: false,
           isSignedIn: false,
           noAccount: false,
+          userData: null,
+        };
+      case 'TO_SIGNUP_PAGE':
+        return {
+          ...prevState,
+          isLoading: false,
+          isSignedIn: false,
+          noAccount: true,
           userData: null,
         };
       case 'RESTORE_TOKEN':
@@ -41,8 +50,6 @@ export const reducer = (prevState, action) => {
           ...prevState,
           isSignedIn: true,
           isLoading: false,
-          userToken: null,
-          userData: null,
         };
       case 'SIGN_IN':
         return {
@@ -58,6 +65,8 @@ export const reducer = (prevState, action) => {
           ...prevState,
           isSignedOut: true,
           userData:null,
+          isSignedIn: false,
+          userToken:null,
         };
     }
   };

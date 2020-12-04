@@ -6,7 +6,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 
-import TransactionStack from "./TransactionStack";
 import Transfer from "./transaction/Transfer";
 
 import * as Font from 'expo-font';

@@ -5,13 +5,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 
-import Transaction from "./Transaction";
-import Transfer from "./transaction/Transfer";
-import Liquidate from "./transaction/Liquidate";
-import Topup from "./transaction/Topup";
-import PreProcessLiquidate from "./transaction/PreProcessLiquidate";
-import PreProcessTopup from "./transaction/PreProcessTopup";
-import ScanQRCode from "./transaction/ScanQRCode";
+import Transaction from "../Transaction";
+import Transfer from "../transaction/Transfer";
+import Liquidate from "../transaction/Liquidate";
+import Topup from "../transaction/Topup";
+import PreProcessLiquidate from "../transaction/PreProcessLiquidate";
+import PreProcessTopup from "../transaction/PreProcessTopup";
+import ScanQRCode from "../transaction/ScanQRCode";
 
 import * as Font from 'expo-font';
 import { Ionicons,MaterialCommunityIcons,EvilIconsIcon,FontAwesome } from '@expo/vector-icons'; 
@@ -27,7 +27,7 @@ export default TransactionStack = ({route, navigation}) => {
   return (   
       <Stack.Navigator initialRouteName="Transaction" screenOptions={{headerShown: false}}>
         <Stack.Screen name="Transaction" component={Transaction} />
-        <Stack.Screen name="Transfer" component={Transfer} />
+        <Stack.Screen name="Transfer" component={Transfer} initialParams={{address:""}}/>
         <Stack.Screen name="Liquidate" component={Liquidate} />
         <Stack.Screen name="Topup" component={Topup} />
         <Stack.Screen name="PreProcessLiquidate" component={PreProcessLiquidate} />

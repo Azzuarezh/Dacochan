@@ -12,6 +12,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ScanQRCode from "./ScanQRCode";
 
 export default Transfer = ({route,navigation}) =>{
+const {  address } = route.params;
  useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
 
@@ -57,11 +58,9 @@ export default Transfer = ({route,navigation}) =>{
                     placeholder="Recipient"
                     placeholderTextColor="rgba(253,248,248,1)"
                     style={styles.textInput2}
+                    value={address}
                   ></TextInput>
-                  <EvilIconsIcon
-                    name={"camera"}
-                    style={styles.icon6} onPress={() => navigation.navigate('ScanQRCode')}
-                  ></EvilIconsIcon>
+                 <FontAwesomeIcon name="qrcode" style={styles.icon6} onPress={() => navigation.navigate('ScanQRCode')}></FontAwesomeIcon>
                 </View>
               </View>
               <View style={styles.recipientFiller}></View>

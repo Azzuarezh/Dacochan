@@ -8,7 +8,7 @@ import * as Font from 'expo-font';
 import { Root } from "native-base";
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import TabBarIcon from "./src/components/TabBarIcon";
+
 
 import {stateConditionString} from './src/utils/helpers';
 import {AuthContext} from './src/utils/authContext';
@@ -19,7 +19,6 @@ import {reducer, initialState} from './src/reducer';
  import SplashScreen from "./src/screens/SplashScreen";
  import Home from './src/screens/Home';
  import Transaction from './src/screens/Transaction';
- import History from './src/screens/History';
 
  import userDummy from './src/dummy_data/users.json';
  import { storeSession,storeToken } from './src/utils/actions';
@@ -28,31 +27,20 @@ const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 export default App = ({route, navigation}) =>{
+
   const [state, dispatch] = useReducer(reducer, initialState)
-  const [isLoading,setLoading] = useReducer(reducer);
+  const [isReady,setReady] = useState(false);
   
  
   useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
-
-    loadResourcesAsync = async () =>{
-      await Promise.all([
-        Font.loadAsync({
-          "roboto-regular": require("./src/assets/fonts/roboto-regular.ttf"),
-          "baumans-regular": require("./src/assets/fonts/baumans-regular.ttf"),
-          "alegreya-sans-sc-700": require("./src/assets/fonts/alegreya-sans-sc-700.ttf")
-        })
-      ]);
-    }
-
-
     const bootstrapAsync = async () => {
       try {
        
         tokenFromAsyncStorage = await AsyncStorage.getItem('userToken');
-        sessionJson = await AsyncStorage.getItem("@Wallet:session")
-        session = await JSON.parse(sessionJson)
-        console.log('token bootstrap: ', {tokenFromAsyncStorage})
+        sessionJson = await AsyncStorage.getItem('@Wallet:session').then()
+        session = JSON.parse(sessionJson)
+        console.log('session bootstrap: ', {session})
         if(session !== null){
           dispatch({type: 'RESTORE_TOKEN', token: tokenFromAsyncStorage, data:session});
 
@@ -65,7 +53,6 @@ export default App = ({route, navigation}) =>{
      
       
     };
-    loadResourcesAsync();
     bootstrapAsync();
      
   }, []);
@@ -74,31 +61,42 @@ export default App = ({route, navigation}) =>{
     () => ({
       signIn: async (inputdata) => {
         const input =inputdata.data;
-        console.log('is the data goes to here? :', inputdata);
+        console.log('is the data goes to here? :', input);
         if (
           input &&
           input.username !== undefined &&
           input.password !== undefined
         ) {
-            const userData = userDummy.map((data) =>{
-            if(input.serName == userDummy.userName && input.password == data.password){
-              input.firstName= data.firstName;
-              input.lastName = data.lastName;
-              input.userEmail = data.userEmail;
-              input.picturePath = data.picturePath;
-              input.ZoaAddress = data.ZoaAddress;
-              console.log('inputData:', input)
-              return input;
+            const userData = {}; 
+            userDummy.map((data) =>{
+              console.log('--------------------------------------')
+            if(input.username == data.username && input.password == data.password){
+              console.log('************************')
+              console.log('data from json:', JSON.stringify(data) )
+              console.log('first name : ',data.firstName)
+              console.log('last name : ', data.lastName)
+              console.log('email :', data.userEmail)
+              console.log('picture :', data.picturePath)
+              console.log('zoa detail:', data.Zoa)
+              console.log('************************')
+              userData.firstName = data.firstName;
+              userData.lastName = data.lastName;
+              userData.userEmail = data.userEmail;
+              userData.picturePath = data.picturePath;
+              userData.Zoa = data.Zoa;            
             }          
           })
 
+          console.log('userDatazzzz:', userData)
           if(userData){
             userToken = new Date().getTime().toString();
             storeSession(userData)
             storeToken(userToken)
-            console.log('tkn :',userToken);
-            console.log('dt :',userData);
             dispatch({type: 'SIGN_IN', token:userToken,data:userData});
+            tokenFromAsyncStorage = await AsyncStorage.getItem('userToken');
+            sessionJson = await AsyncStorage.getItem("@Wallet:session")
+            session = await JSON.parse(sessionJson)
+            console.log('lets see if the data stored to async storage: ', {session})
           }
           else{            
           console.err('no user found!')
@@ -109,9 +107,10 @@ export default App = ({route, navigation}) =>{
         }
       },
       signOut: async (data) => {
+        console.log('is it going here?????? ')
+        await AsyncStorage.multiRemove(['@Wallet:session','userToken']).then(() => console.log('session and token on Storage cleared!'))
         dispatch({type: 'SIGN_OUT'});
       },
-
       signUp: async (data) => {
         if (
           data &&
@@ -124,9 +123,13 @@ export default App = ({route, navigation}) =>{
           dispatch({type: 'TO_SIGNUP_PAGE'});
         }
       },
-      getHomeData: async() => {
-          dispatch({type:'SIGNED_IN'})
-          return state
+      gotoSignUpPage: async () => {
+        console.log('this going to sign up page')
+        dispatch({type: 'TO_SIGNUP_PAGE'});
+      },
+      getSessionData: async () => {
+        console.log('this going to load session data')
+        dispatch({type: 'SIGNED_IN'});
       }
     }),
     [],
@@ -140,12 +143,22 @@ export default App = ({route, navigation}) =>{
   }
 
   handleFinishLoading = (setLoadingComplete) =>{
-    setLoadingComplete(true);
+    setReady(true);
   }
+
+  loadResourcesAsync = async () =>{
+      await Promise.all([
+        Font.loadAsync({
+          "roboto-regular": require("./src/assets/fonts/roboto-regular.ttf"),
+          "baumans-regular": require("./src/assets/fonts/baumans-regular.ttf"),
+          "alegreya-sans-sc-700": require("./src/assets/fonts/alegreya-sans-sc-700.ttf")
+        })
+      ]);
+    }
 
 
   const chooseScreen = (state) => {
-    console.log('choose sscreen state : ', state)
+    console.log('stut : ', state)
     let navigateTo = stateConditionString(state);
     console.log('now we will navigate to screen : ', navigateTo)
     let arr = [];
@@ -183,14 +196,27 @@ export default App = ({route, navigation}) =>{
         break;
     }
     return arr[0];
-  }
-   return (
+  } 
+
+  if(!isReady){
+    return (
+        <AppLoading
+          startAsync={loadResourcesAsync()}
+          onFinish={() => handleFinishLoading()}
+          onError={() => handleLoadingError()}
+        />
+      );
+  }else{
+      return (
         <AuthContext.Provider value={authContextValue}>
           <NavigationContainer>
             <Stack.Navigator screenOptions={{headerShown: false}}>{chooseScreen(state)}</Stack.Navigator>
           </NavigationContainer>
         </AuthContext.Provider>
       );  
+  }
+
+   
 }
 
 

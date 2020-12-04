@@ -12,7 +12,7 @@ import { validateAll } from 'indicative/validator';
 import {
     Card,
     FormValidationMessage,
-    Button
+    Button,Input
 } from 'react-native-elements';
 import IoniconsIcon from "react-native-vector-icons/Ionicons";
 import EntypoIcon from "react-native-vector-icons/Entypo";

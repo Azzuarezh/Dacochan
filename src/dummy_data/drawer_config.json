@@ -1,0 +1,28 @@
+ [
+  {
+    "name": "Profile",
+    "route": "Profile",
+    "icon": "phone-portrait",
+    "bg": "#C5F442"
+  },
+  {
+    "name": "My QR Code",
+    "route": "QRCode",
+    "icon": "arrow-up",
+    "bg": "#477EEA",
+    "types": "11"
+  },
+  {
+    "name": "Settings",
+    "route": "NHAccordion",
+    "icon": "repeat",
+    "bg": "#C5F442",
+    "types": "5"
+  },
+  {
+    "name": "Feedback",
+    "route": "Feedback",
+    "icon": "easel",
+    "bg": "#C5F442"
+  }
+]

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component,useState,useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -7,10 +7,41 @@ import {
   Text,
   ScrollView
 } from "react-native";
+import { Button, Icon, Fab } from 'native-base';
 import HeaderNoIcon from "../components/HeaderNoIcon";
 import ScrollViewEntry from "../components/ScrollViewEntry";
 
-function History(props) {
+export default History = (props) => {
+
+  const [currentTab,setCurrentTab] = useState('all');
+  const [active,setActive] = useState(false);
+  const [HistoryData,setHistoryData] = useState({
+    "incoming":[
+      {
+        "transtype":"receive",
+        "date":"Nov 16, 2020",
+        "description":"Received 2.0 Zoa from John" 
+      },
+      {
+        "transtype":"topup",
+        "date":"Nov 15, 2020",
+        "description":"Topup 10.0 Zoa from OVO wallet" 
+      },
+    ],
+    "outgoing":[
+      {
+        "transtype":"transfer",
+        "date":"Nov 17, 2020",
+        "description":"Transfer 10.0 Zoa to Kohir" 
+      },
+      {
+        "transtype":"liquidate",
+        "date":"Nov 18, 2020",
+        "description":"Liquidate $15.0 to Bank Account BCA" 
+      },
+    ]
+  });
+
   return (
     <View style={styles.root}>
       <StatusBar barStyle="light-content" backgroundColor="rgba(0,0,0,0)" />
@@ -20,13 +51,18 @@ function History(props) {
       <View style={styles.bodyStack}>
         <View style={styles.body}>
           <View style={styles.tabs}>
-            <TouchableOpacity style={styles.all_Transaction}>
-              <Text style={styles.text}>All</Text>
+            <TouchableOpacity style={(currentTab=='all')?[styles.all_Transaction,styles.highlightedTab]:styles.all_Transaction}
+            onPress={()=> setCurrentTab('all')}
+            >
+              <Text style={styles.text}>All </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.incoming}>
+            <TouchableOpacity style={(currentTab=='incoming')? [styles.incoming,styles.highlightedTab]:styles.incoming}
+            onPress={()=> setCurrentTab('incoming')}>
               <Text style={styles.text2}>Incoming</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity 
+            style={(currentTab=='outgoing')? [styles.button,styles.highlightedTab]:styles.button}
+            onPress={()=> setCurrentTab('outgoing')}>
               <Text style={styles.text3}>Outgoing</Text>
             </TouchableOpacity>
           </View>
@@ -36,12 +72,40 @@ function History(props) {
             horizontal={false}
             contentContainerStyle={styles.scrollArea1_contentContainerStyle}
           >
-            <ScrollViewEntry style={styles.scrollViewEntry1}></ScrollViewEntry>
-            <ScrollViewEntry style={styles.scrollViewEntry4}></ScrollViewEntry>
-            <ScrollViewEntry style={styles.scrollViewEntry2}></ScrollViewEntry>
-            <ScrollViewEntry style={styles.scrollViewEntry3}></ScrollViewEntry>
+          
+            {(currentTab == 'all')?
+
+              HistoryData.incoming.concat(HistoryData.outgoing).map((inc)=>(
+                <ScrollViewEntry style={styles.scrollViewEntry1} 
+                  transtype={inc.transtype} 
+                transdate={inc.date}
+                description={inc.description}></ScrollViewEntry>
+              ))
+              : (currentTab == 'incoming')?
+              HistoryData.incoming.map((inc)=>(
+                <ScrollViewEntry style={styles.scrollViewEntry1} 
+                  transtype={inc.transtype} 
+                transdate={inc.date}
+                description={inc.description}></ScrollViewEntry>
+              )) :
+              HistoryData.outgoing.map((out)=>(
+                <ScrollViewEntry style={styles.scrollViewEntry1} 
+                  transtype={out.transtype} 
+                transdate={out.date}
+                description={out.description}></ScrollViewEntry>
+              ))
+            }
           </ScrollView>
         </View>
+        <Fab
+            active={active}
+            direction="up"
+            containerStyle={{ }}
+            style={{ backgroundColor: '#5067FF' }}
+            position="bottomRight"
+            onPress={() => setActive(!active)}>
+            <Icon name="search" />
+          </Fab>
       </View>
     </View>
   );
@@ -89,9 +153,6 @@ const styles = StyleSheet.create({
     height: 38,
     backgroundColor: "rgba(247,247,247,0)",
     alignSelf: "center",
-    borderRadius: 5,
-    borderColor: "rgba(255,255,255,1)",
-    borderWidth: 1,
     justifyContent: "center"
   },
   text: {
@@ -132,7 +193,7 @@ const styles = StyleSheet.create({
   scrollArea1_contentContainerStyle: {
     height: 581
   },
-  scrollViewEntry1: {
+  scrollViewEntry: {
     height: 100
   },
   scrollViewEntry4: {
@@ -150,7 +211,11 @@ const styles = StyleSheet.create({
   bodyStack: {
     flex: 1,
     marginBottom: -1
-  }
+  },
+    highlightedTab :{
+    borderColor: "rgba(255,255,255,1)",
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor:"rgba(255,255,255,1)",
+  },
 });
-
-export default History;

@@ -1,4 +1,4 @@
-import React, { Component,useState,useEffect } from "react";
+import React, { Component,useState,useEffect} from "react";
 import {
   StyleSheet,
   View,
@@ -13,28 +13,27 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-
+import * as Font from 'expo-font';
 
 export default Dashboard = ({route, navigation}) => {  
 
-  const [userData, setUserData] = useState({});    
+  const [userData, setUserData] = useState({}); 
+
   useEffect(() => {
+ 
     // Fetch the token from storage then navigate to our appropriate place
 
     const bootstrapAsync = async () => {
       try {
-       
-        tokenFromAsyncStorage = await AsyncStorage.getItem('userToken');
         sessionJson = await AsyncStorage.getItem("@Wallet:session")
         console.log('stringJSON : ',sessionJson)
         session = await JSON.parse(sessionJson)
-        sessionObj = session[0];
         
-        if(sessionObj !== null){
+        
+        if(session !== null){
           console.log('not null dude')
-          console.log('session dashboard obj: ', sessionObj)
-          setUserData(sessionObj)
+          console.log('session dashboard obj: ', session)
+          setUserData(session)
           console.log('userdata bootstrap 432: ',userData)
         }
       } catch (e) {
@@ -64,8 +63,8 @@ export default Dashboard = ({route, navigation}) => {
               imageStyle={styles.image_imageStyle}
             >
               <View style={styles.overlay}>
-                <Text style={styles.welcome_Banner}>WELCOME {userData.firstName} {userData.lastName}</Text>
-                <Text style={styles.amount}>&lt;Amount&gt; ZOA</Text>
+                <Text style={styles.welcome_Banner}>Welcome {userData.firstName} {userData.lastName} </Text>
+                <Text style={styles.amount}>Balance: {userData ? userData.Zoa && userData.Zoa.amount:"Loading..."} ZOA</Text>
               </View>
             </ImageBackground>
           </View>
@@ -88,14 +87,14 @@ export default Dashboard = ({route, navigation}) => {
                   <Text style={styles.marketGraph}>Market graph</Text>
                 </View>
               </TouchableOpacity>
+              <TouchableOpacity style={styles.button3}>
+                <View style={styles.rect3Filler}></View>
+                <View style={styles.rect3}>
+                  <Text style={styles.marketGraph}>News</Text>
+                </View>
+              </TouchableOpacity>
             </View>
             <View style={styles.button1ColumnFiller}></View>
-            <TouchableOpacity style={styles.button5}>
-              <View style={styles.rect5Filler}></View>
-              <View style={styles.rect5}>
-                <Text style={styles.news}>News</Text>
-              </View>
-            </TouchableOpacity>
           </View>
         </View>
        
@@ -137,22 +136,24 @@ const styles = StyleSheet.create({
   },
   image_imageStyle: {},
   overlay: {
-    backgroundColor: "rgba(30,26,26,0.4)",
+    backgroundColor: "rgba(0,0,06,0.4)",
     flex: 1
   },
   welcome_Banner: {
     color: "rgba(255,255,255,1)",
-    fontSize: 30,
+    fontSize: 33,
+    fontWeight:"bold",
     fontFamily: "alegreya-sans-sc-700",
     marginTop: 87,
     alignSelf: "center"
   },
   amount: {
     color: "rgba(255,255,255,1)",
-    fontSize: 30,
-    fontFamily: "alegreya-sans-sc-700",
+    fontSize: 22,
+    fontWeight:"bold",
+    fontFamily: "baumans-regular",
+    alignSelf:"center",
     marginTop: 14,
-    marginLeft: 82
   },
   categories1: {
     top: 244,
@@ -175,8 +176,8 @@ const styles = StyleSheet.create({
     fontSize: 40,
     height: 40,
     width: 40,
-    marginTop: 22,
-    marginLeft: 153
+    marginTop: 12,
+    marginLeft: 150
   },
   iconFiller: {
     flex: 1
@@ -191,22 +192,23 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: "alegreya-sans-sc-700",
     textAlign: "center",
-    marginLeft: 32,
-    marginTop: -57
+    marginLeft: 35,
+    marginTop: -50
   },
   zoaToday: {
     color: "rgba(247,252,253,1)",
     fontSize: 14,
-    marginLeft: 12,
-    alignSelf: "center"
+    marginLeft: 30,
+    alignSelf: "center",
+    fontFamily: "baumans-regular"
   },
   amountZoa2: {
     color: "rgba(255,255,255,1)",
     fontSize: 20,
     fontFamily: "alegreya-sans-sc-700",
     textAlign: "center",
-    marginLeft: 14,
-    marginTop: -55
+    marginLeft: 20,
+    marginTop: -50
   },
   button3: {
     width: 331,

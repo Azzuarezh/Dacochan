@@ -1,16 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-export function logout() {
-  return {
-    type: 'RESET_STATE'
-  };
-}
-
 
 
 export function storeSession(session) {
   try {
+    console.log('fn storeSession  session data :',session)
     AsyncStorage.setItem("@Wallet:session", JSON.stringify(session)).then(() => {
       console.log('Session stored');
     })

@@ -5,8 +5,11 @@
         "firstName":"Kohir",
         "lastName":"Dakkochan",
         "picturePath":"",
-        "ZoaAddress":"random",
-        "userEmail":"kohir_dakochan@domain.com"
+        "userEmail":"kohir_dakochan@domain.com",
+        "Zoa":{
+            "address":"a441b15fe9a3cf56661190a0b93b9dec7d04127288cc87250967cf3b52894d11",
+            "amount":"1000"
+        }
     },
     {
         "username":"Feri",
@@ -14,7 +17,22 @@
         "firstName":"Feri",
         "lastName":"Cbus",
         "picturePath":"",
-        "ZoaAddress":"shuffled",
-        "userEmail":"ferife@domain.com"
+        "userEmail":"ferife@domain.com",
+        "Zoa":{
+            "address":"6b1f79e54977f4de06626f4fe6e473ce5128a0b7a82910aee9b27eaa51ba6d63",
+            "amount":"100"
+        }
+    },
+    {
+        "username":"John",
+        "password":"johndoe",
+        "firstName":"John",
+        "lastName":"Doe",
+        "picturePath":"",
+        "userEmail":"johndoe@domain.com",
+        "Zoa":{
+            "address":"5245a52778d684fa698f69861fb2e058b308f6a74fed5bf2fe77d97bad5e071c",
+            "amount":"100"
+        }
     }
 ]

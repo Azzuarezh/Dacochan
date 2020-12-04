@@ -31,7 +31,7 @@ export default PreProcessTopup = ({route,navigation}) => {
               Please transfer your balance {"\n"}to account below:
             </Text>
             <Text style={styles.accountNumber}>&lt;Account_Number&gt;</Text>
-            <Text style={styles.txtUniqueCode}>with a unique code :</Text>
+            <Text style={styles.txtUniqueCode}>with a amount :</Text>
             <Text style={styles.uniqueCode}>&lt;Unique_Code&gt;</Text>
             <MaterialButtonPurple
               style={styles.materialButtonPurple}
@@ -81,32 +81,30 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: "center",
     marginTop: 137,
-    marginLeft: 101
   },
   detail: {
     color: "rgba(255,255,255,1)",
     fontSize: 20,
     textAlign: "center",
     marginTop: 49,
-    marginLeft: 69
   },
   accountNumber: {
     color: "rgba(255,255,255,1)",
     fontSize: 24,
     marginTop: 14,
-    marginLeft: 80
+    alignSelf:"center"
   },
   txtUniqueCode: {
     color: "rgba(255,255,255,1)",
     fontSize: 20,
     marginTop: 37,
-    marginLeft: 103
+    alignSelf:"center"
   },
   uniqueCode: {
     color: "rgba(255,255,255,1)",
     fontSize: 24,
     marginTop: 31,
-    marginLeft: 103
+    alignSelf:"center"
   },
   materialButtonPurple: {
     height: 52,

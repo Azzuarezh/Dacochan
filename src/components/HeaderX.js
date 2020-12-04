@@ -1,54 +1,65 @@
-import React, { useEffect ,Component } from "react";
+import React, { useEffect ,Component,useContext } from "react";
 import { StyleSheet, View, TouchableOpacity,Text, Alert } from "react-native";
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
+import {Badge, WithBadge} from 'react-native-elements';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { NavigationContainer } from '@react-navigation/native';
 import { AppLoading} from "expo";
 import * as Font from 'expo-font';
-
-const HeaderX = (props)=> {
-
-const ConfirmLogout = () =>
-    Alert.alert(
-      "Logout",
-      "Are You Sure Want to log out?",
-      [
-        {
-          text: "No",
-          onPress: () => console.log("No Pressed"),
-          style: "cancel"
-        },
-        { text: "Yes", onPress: () => console.log("Yes Pressed") }
-      ],
-      { cancelable: false }
-    );
+import {AuthContext} from '.../../utils/authContext';
 
 
-useEffect(() => {
-    // Fetch the token from storage then navigate to our appropriate place
+export default HeaderX = ({navigation}) => {
+  
+const {signOut} = useContext(AuthContext);
+  const handleLogout = () => {
+    console.log('handle logout');
+    signOut();
+  }
+  const ConfirmLogout = () =>
+      Alert.alert(
+        "Logout",
+        "Are You Sure Want to log out?",
+        [
+          {
+            text: "No",
+            onPress: () => console.log("No Pressed"),
+            style: "cancel"
+          },
+          { text: "Yes", onPress: () => handleLogout() }
+        ],
+        { cancelable: false }
+      );
 
-    loadResourcesAsync = async () =>{
-      await Promise.all([
-        Font.loadAsync({
-          "roboto-regular": require("../assets/fonts/roboto-regular.ttf"),
-          "baumans-regular": require("../assets/fonts/baumans-regular.ttf"),
-          "alegreya-sans-sc-700": require("../assets/fonts/alegreya-sans-sc-700.ttf")
-        })
-      ]);
-    }
+
+  useEffect(() => {
+      // Fetch the token from storage then navigate to our appropriate place
+
+      loadResourcesAsync = async () =>{
+        await Promise.all([
+          Font.loadAsync({
+            "roboto-regular": require("../assets/fonts/roboto-regular.ttf"),
+            "baumans-regular": require("../assets/fonts/baumans-regular.ttf"),
+            "alegreya-sans-sc-700": require("../assets/fonts/alegreya-sans-sc-700.ttf")
+          })
+        ]);
+      }
 
 
 
-    loadResourcesAsync();
-     
-  }, []);
+      loadResourcesAsync();
+      
+    }, []);
 
+
+    
 
   return (
-        <Header style={[styles.container, props.style]}>
+        <Header style={[styles.container]}>
           <Left style={styles.group}>
             <Button transparent>
-              <Icon name={props.icon2Name || "dehaze"} style={styles.icon3}></Icon>
+              <Icon name={"dehaze"} style={styles.icon3}></Icon>
             </Button>
           </Left>
           <Body>
@@ -59,23 +70,17 @@ useEffect(() => {
              <MaterialCommunityIcons name="logout" style={styles.icon3} onPress={ConfirmLogout}/>
             </Button>
             <Button transparent>
-              <Icon name={props.icon2Name || "notifications"} style={styles.icon3}></Icon>
+            <Icon name={ "notifications"} style={styles.icon3}>
+            </Icon>
+                <Badge
+                    status="error"
+                    value="99+"
+                    containerStyle={{ position: 'absolute', top: 3, right: 3 }}
+                  />
+
             </Button>
           </Right>
         </Header>
-
-    // <View style={[styles.container, props.style]}>
-    //   <View style={styles.group}>
-    //     <View style={styles.logoHeaderFiller}></View>
-    //     <TouchableOpacity /* Conditional navigation not supported at the moment */
-    //       onPress={() => console.log("Navigate to Settings")}
-    //       style={styles.group2}
-    //     >
-    //       <Icon name={props.icon2Name || "dehaze"} style={styles.icon3}></Icon>
-    //     </TouchableOpacity>
-    //     <Text>Dacochan</Text>
-    //   </View>
-    // </View>
   );
 }
 
@@ -110,4 +115,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HeaderX;
+

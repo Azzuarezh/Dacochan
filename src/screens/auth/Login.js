@@ -35,7 +35,6 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import { validateAll } from 'indicative/validator';
 import {
-    Card,
     FormValidationMessage
 } from 'react-native-elements';
 
@@ -47,10 +46,7 @@ import { AuthContext } from '../../utils/authContext';
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [SignInErrors, setSignInErrors] = useState({});
-    
- 
-
-    const { signIn, signUp } = useContext(AuthContext);
+    const { signIn, gotoSignUpPage } = useContext(AuthContext);
 
     const handleSignIn = () => {
           // https://indicative.adonisjs.com
@@ -145,7 +141,7 @@ import { AuthContext } from '../../utils/authContext';
               <View style={styles.logoColumnFiller}></View>
               <View style={styles.footerTexts}>
                 <TouchableOpacity
-                  onPress={() => signUp()}
+                  onPress={() => gotoSignUpPage()}
                   style={styles.button2}
                 >
                   <View style={styles.createAccountFiller}></View>

@@ -62,16 +62,14 @@ const styles = StyleSheet.create({
   verify: {
     color: "rgba(255,255,255,1)",
     fontSize: 24,
-    textAlign: "center",
+    alignSelf: "center",
     marginTop: 174,
-    marginLeft: 84
   },
   text42: {
     color: "rgba(255,255,255,1)",
     fontSize: 20,
-    textAlign: "center",
+    alignSelf: "center",
     marginTop: 29,
-    marginLeft: 61
   },
   materialSpinner: {
     width: 160,
