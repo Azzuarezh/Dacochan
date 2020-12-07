@@ -5,31 +5,15 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import { AppLoading} from "expo";
 import * as Font from 'expo-font';
 
-const HeaderNoIcon = (props)=> {
-
-useEffect(() => {
-    // Fetch the token from storage then navigate to our appropriate place
-
-    loadResourcesAsync = async () =>{
-      await Promise.all([
-        Font.loadAsync({
-          "roboto-regular": require("../assets/fonts/roboto-regular.ttf"),
-          "baumans-regular": require("../assets/fonts/baumans-regular.ttf"),
-          "alegreya-sans-sc-700": require("../assets/fonts/alegreya-sans-sc-700.ttf")
-        })
-      ]);
-    }
-
-
-
-    loadResourcesAsync();
-     
-  }, []);
+export default HeaderNoIcon = (props) => {
 
 
   return (
         <Header style={[styles.container, props.style]}>
           <Left style={styles.group}>
+          <Button transparent onPress={()=> props.navigation.openDrawer()}>
+              <Icon name={"dehaze"} style={styles.icon3}></Icon>
+            </Button>
           </Left>
           <Body>
             <Title style={styles.logoHeader}>Dacochan</Title>
@@ -37,19 +21,6 @@ useEffect(() => {
           <Right>
           </Right>
         </Header>
-
-    // <View style={[styles.container, props.style]}>
-    //   <View style={styles.group}>
-    //     <View style={styles.logoHeaderFiller}></View>
-    //     <TouchableOpacity /* Conditional navigation not supported at the moment */
-    //       onPress={() => console.log("Navigate to Settings")}
-    //       style={styles.group2}
-    //     >
-    //       <Icon name={props.icon2Name || "dehaze"} style={styles.icon3}></Icon>
-    //     </TouchableOpacity>
-    //     <Text>Dacochan</Text>
-    //   </View>
-    // </View>
   );
 }
 
@@ -84,4 +55,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HeaderNoIcon;

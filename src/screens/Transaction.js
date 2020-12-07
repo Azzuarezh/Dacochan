@@ -14,29 +14,11 @@ import { Container, Header, Content, Button, ListItem, Text, Icon, Left, Body, R
 
 const Stack = createStackNavigator();
 export default Transaction = ({route, navigation}) => {
-  useEffect(() => {
-    // Fetch the token from storage then navigate to our appropriate place
 
-    loadResourcesAsync = async () =>{
-      console.log('navigation : ', navigation);
-      await Promise.all([
-        Font.loadAsync({
-          "roboto-regular": require("../assets/fonts/roboto-regular.ttf"),
-          "baumans-regular": require("../assets/fonts/baumans-regular.ttf"),
-          "alegreya-sans-sc-700": require("../assets/fonts/alegreya-sans-sc-700.ttf")
-        })
-      ]);
-    }
-
-
-
-    loadResourcesAsync();
-     
-  }, []);
   return (
     <View style={styles.root}>
       <StatusBar barStyle="light-content" backgroundColor="rgba(0,0,0,0)" />
-      <HeaderNoIcon style={styles.headerX}></HeaderNoIcon>
+      <HeaderNoIcon style={styles.headerX} navigation={navigation}></HeaderNoIcon>
       <View gradientImage="Gradient_xjVvfkX.png" style={styles.body}>
         <ListItem icon onPress={() => navigation.navigate('Transfer')}>
             <Left>

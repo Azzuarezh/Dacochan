@@ -11,7 +11,7 @@ import { Button, Icon, Fab } from 'native-base';
 import HeaderNoIcon from "../components/HeaderNoIcon";
 import ScrollViewEntry from "../components/ScrollViewEntry";
 
-export default History = (props) => {
+export default History = ({navigation}) => {
 
   const [currentTab,setCurrentTab] = useState('all');
   const [active,setActive] = useState(false);
@@ -47,6 +47,7 @@ export default History = (props) => {
       <StatusBar barStyle="light-content" backgroundColor="rgba(0,0,0,0)" />
       <HeaderNoIcon
         style={styles.headerX}
+        navigation={navigation}
       ></HeaderNoIcon>
       <View style={styles.bodyStack}>
         <View style={styles.body}>

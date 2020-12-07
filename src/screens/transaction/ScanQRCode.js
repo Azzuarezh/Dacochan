@@ -27,7 +27,7 @@ export default ScanQRCode = ({route,navigation}) => {
   const getPermissionsAsync = async () => {
     const {status} = await Permissions.askAsync(Permissions.CAMERA)
     const isPermissionGranted = status === 'granted'
-    console.log(isPermissionGranted)
+    console.log('permission camera? ', isPermissionGranted)
     setCameraPermission(isPermissionGranted)
   }
 
@@ -40,7 +40,7 @@ export default ScanQRCode = ({route,navigation}) => {
   if (hasCameraPermission === null) {
     return <View style={styles.root}>
       <StatusBar barStyle="light-content" backgroundColor="rgba(0,0,0,0)" />
-      <HeaderNoIcon style={styles.headerX}></HeaderNoIcon>
+      <HeaderNoIcon style={styles.headerX} navigation={navigation}></HeaderNoIcon>
       <View gradientImage="Gradient_xjVvfkX.png" style={styles.body}>
         <View style={styles.background}>
           <ImageBackground
@@ -80,7 +80,7 @@ export default ScanQRCode = ({route,navigation}) => {
   return (
     <View style={styles.root}>
       <StatusBar barStyle="light-content" backgroundColor="rgba(0,0,0,0)" />
-      <HeaderNoIcon style={styles.headerX}></HeaderNoIcon>
+      <HeaderNoIcon style={styles.headerX} navigation={navigation}></HeaderNoIcon>
       <View gradientImage="Gradient_xjVvfkX.png" style={styles.body}>
         <View style={styles.background}>
           <ImageBackground

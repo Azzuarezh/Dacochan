@@ -8,7 +8,7 @@ import {
   TextInput
 } from "react-native";
 import HeaderNoIcon from "../../components/HeaderNoIcon";
-import { MaterialIcons } from '@expo/vector-icons'; 
+import { MaterialIcons,MaterialCommunityIcons } from '@expo/vector-icons'; 
 import EntypoIcon from "react-native-vector-icons/Entypo";
 import EvilIconsIcon from "react-native-vector-icons/EvilIcons";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
@@ -22,30 +22,16 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Icon, Picker, Form } from "native-base";
 import PreProcessLiquidate from "./PreProcessLiquidate";
 
+
 export default Liquidate = ({route,navigation}) => {
   
 const [selected,setSelected] = useState('');
-useEffect(() => {
-  console.log('naff : ', navigation)
-    // Fetch the token from storage then navigate to our appropriate place
-    loadResourcesAsync = async () =>{
-      await Promise.all([
-        Font.loadAsync({
-          "roboto-regular": require("../../assets/fonts/roboto-regular.ttf"),
-          "baumans-regular": require("../../assets/fonts/baumans-regular.ttf"),
-          "alegreya-sans-sc-700": require("../../assets/fonts/alegreya-sans-sc-700.ttf")
-        })
-      ]);
-    }
 
-    loadResourcesAsync();
-     
-  }, []);
 
   return (
     <View style={styles.root}>
       <StatusBar barStyle="light-content" backgroundColor="rgba(0,0,0,0)" />
-      <HeaderNoIcon style={styles.headerX}></HeaderNoIcon>
+      <HeaderNoIcon style={styles.headerX} navigation={navigation}></HeaderNoIcon>
       <View gradientImage="Gradient_xjVvfkX.png" style={styles.body}>
         <View style={styles.background}>
           <ImageBackground
@@ -95,7 +81,7 @@ useEffect(() => {
                       placeholderTextColor="rgba(253,248,248,1)"
                       style={styles.textInput2}
                     ></TextInput>
-                    <MaterialIcons name="import-contacts" style={styles.icon6}/>
+                    <MaterialCommunityIcons name="account-search" style={styles.icon6}/>
                   </View>
               </View>
               <View style={styles.recipientFiller}></View>

@@ -11,12 +11,17 @@
       "android",
       "web"
     ],
-    
+    "splash": {
+      "image": "./src/assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1f78cc"
+    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "ios": {
       "supportsTablet": true,
+      "icon":"./src/assets/images/icon.png",
       "infoPlist": {
         "NSCameraUsageDescription": "Dacochan needs Camera permisions to allow you to post photos.",
         "NSPhotoLibraryAddUsageDescription": "Dacochan needs photo library permissions to allow you to post photos."
@@ -24,7 +29,8 @@
     },
     "android": {
       "package": "com.cbus.dacochan",
-      "versionCode": 1
+      "versionCode": 1,
+      "icon":"./src/assets/images/icon.png"
     }
     
   }

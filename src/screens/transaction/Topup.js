@@ -24,26 +24,13 @@ import PreProcessTopup from "./PreProcessTopup";
 
 export default Topup = ({route,navigation}) => {
 const [selected,setSelected] = useState('');
-useEffect(() => {
-    // Fetch the token from storage then navigate to our appropriate place
-    loadResourcesAsync = async () =>{
-      await Promise.all([
-        Font.loadAsync({
-          "roboto-regular": require("../../assets/fonts/roboto-regular.ttf"),
-          "baumans-regular": require("../../assets/fonts/baumans-regular.ttf"),
-          "alegreya-sans-sc-700": require("../../assets/fonts/alegreya-sans-sc-700.ttf")
-        })
-      ]);
-    }
+const [amount,setAmount] = useState(0);
 
-    loadResourcesAsync();
-     
-  }, []);
 
   return (
     <View style={styles.root}>
       <StatusBar barStyle="light-content" backgroundColor="rgba(0,0,0,0)" />
-      <HeaderNoIcon style={styles.headerX}></HeaderNoIcon>
+      <HeaderNoIcon style={styles.headerX} navigation={navigation}></HeaderNoIcon>
       <View gradientImage="Gradient_xjVvfkX.png" style={styles.body}>
         <View style={styles.background}>
           <ImageBackground
@@ -120,13 +107,18 @@ useEffect(() => {
                     returnKeyType="done"
                     keyboardType="numeric"
                     style={styles.textInput3}
+                    onChangeText={text => setAmount(text)}
+                    value={amount}
                   ></TextInput>
                 </View>
                 </View>
                 <IoniconsIcon
                 name="md-arrow-forward"
                 style={styles.icon5}
-                onPress={() => navigation.navigate('PreProcessTopup')}
+                onPress={() => navigation.navigate('PreProcessTopup',{
+                  amount: amount
+                })
+                }
                 ></IoniconsIcon>
             </View>
           </ImageBackground>

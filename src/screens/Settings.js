@@ -1,14 +1,44 @@
-import React, { Component } from "react";
-import { StyleSheet, View, StatusBar, Text, Switch, Image } from "react-native";
-import HeaderX from "../components/HeaderX";
+import React, { Component, useContext,useState,useEffect } from "react";
+import { StyleSheet, View, StatusBar, Text, Switch, Image,Button } from "react-native";
+import HeaderNoIcon from "../components/HeaderNoIcon";
 import Svg, { Ellipse } from "react-native-svg";
 import IoniconsIcon from "react-native-vector-icons/Ionicons";
+import {  GetSession, GetToken } from '../utils/actions';
 
-function Settings(props) {
+import ferifeImage from  '../assets/images/user_pic/ferife.jpg';
+import kohirImage from  '../assets/images/user_pic/kohir.jpg';
+import anonymousImage from  '../assets/images/user_pic/anonymous.jpg';
+
+export default Settings = ({route, navigation}) => {
+
+  const [userData, setUserData] = useState({}); 
+
+   useEffect(() => {
+ 
+    // Fetch the token from storage then navigate to our appropriate place
+
+    const bootstrapAsync = async () => {
+      try {
+        sessionJson = await GetSession()
+        session = await JSON.parse(sessionJson)        
+        if(session !== null){
+          setUserData(session)
+        }
+      } catch (e) {
+        // Restoring token failed
+        console.log('error restore token profile: ', e)
+      }
+      //dispatch({type: 'RESTORE_TOKEN', token: userToken});
+      
+
+    };
+    bootstrapAsync();
+  }, []);
+
   return (
     <View style={styles.root}>
       <StatusBar barStyle="light-content" backgroundColor="rgba(0,0,0,0)" />
-      <HeaderX icon2Name="power" style={styles.headerX}></HeaderX>
+      <HeaderNoIcon icon2Name="power" style={styles.headerX} navigation={navigation}></HeaderNoIcon>
       <View style={styles.body}>
         <View style={styles.ellipseStack}>
           <Svg viewBox="0 0 859.43 890.3" style={styles.ellipse}>
@@ -72,15 +102,15 @@ function Settings(props) {
           <View style={styles.userInfo}>
             <View style={styles.avatarRow}>
               <Image
-                source={require("../assets/images/zotova1.jpg")}
+                source={(userData.username =='kohir')? kohirImage :(userData.username =='ferife') ?ferifeImage:anonymousImage}
                 resizeMode="stretch"
                 style={styles.avatar}
               ></Image>
               <View style={styles.useremailDomainComStack}>
                 <Text style={styles.useremailDomainCom}>
-                  useremail@domain.com
+                  {userData.userEmail}
                 </Text>
-                <Text style={styles.userName}>User{"\n"}Name</Text>
+                <Text style={styles.userName}>{userData.username}</Text>
               </View>
             </View>
           </View>
@@ -272,5 +302,3 @@ const styles = StyleSheet.create({
     marginRight: -449
   }
 });
-
-export default Settings;

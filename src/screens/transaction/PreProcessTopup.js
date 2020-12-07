@@ -1,4 +1,4 @@
-import React, { useEffect,Component } from "react";
+import React, { useEffect,useState,Component } from "react";
 import {
   StyleSheet,
   View,
@@ -11,6 +11,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 export default PreProcessTopup = ({route,navigation}) => {
+  const {amount } = route.params;
+
   return (
     <View style={styles.root}>
       <StatusBar barStyle="light-content" backgroundColor="rgba(0,0,0,0)" />
@@ -30,9 +32,9 @@ export default PreProcessTopup = ({route,navigation}) => {
             <Text style={styles.detail}>
               Please transfer your balance {"\n"}to account below:
             </Text>
-            <Text style={styles.accountNumber}>&lt;Account_Number&gt;</Text>
-            <Text style={styles.txtUniqueCode}>with a amount :</Text>
-            <Text style={styles.uniqueCode}>&lt;Unique_Code&gt;</Text>
+            <Text style={styles.accountNumber}>XXX_XXX_XXX_XXX</Text>
+            <Text style={styles.txtUniqueCode}>with amount :</Text>
+            <Text style={styles.uniqueCode}>{amount}.{Math.floor(Math.random() * (1000 - 100 + 1) + 100)}</Text>
             <MaterialButtonPurple
               style={styles.materialButtonPurple}
             ></MaterialButtonPurple>

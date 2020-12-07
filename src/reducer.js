@@ -1,8 +1,5 @@
 export const reducer = (prevState, action) => {
-  console.log(',,,,,,,,,,,,,,,,,,,,,,,,')
-  console.log('Previous State :', prevState)
-  console.log('action :', action)
-  console.log(',,,,,,,,,,,,,,,,,,,,,,,,')
+    console.log('action :', action)
     switch (action.type) {
       case 'TO_SIGNUP_PAGE':
         return {

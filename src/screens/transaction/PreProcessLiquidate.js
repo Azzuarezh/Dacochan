@@ -1,4 +1,4 @@
-import React, { useEffect,Component } from "react";
+import React, { Component, useState, useEffect,useRef } from "react";
 import {
   StyleSheet,
   View,
@@ -12,6 +12,28 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 export default PreProcessLiquidate = ({route, navigation}) => {
+
+  const [timer, setTimer] = React.useState(10);
+  const id =useRef(null);
+  const clear=()=>{
+    clearInterval(id.current)
+  }
+  useEffect(()=>{
+     id.current= setInterval(()=>{
+      setTimer((time)=>time-1)
+    },1000)
+    return ()=>clear();
+  },[])
+
+  useEffect(()=>{
+    if(timer===0){
+      clear()
+      navigation.navigate('Transaction');
+    }
+
+  },[timer])
+
+
   return (
     <View style={styles.root}>
       <StatusBar barStyle="light-content" backgroundColor="rgba(0,0,0,0)" />
@@ -28,6 +50,9 @@ export default PreProcessLiquidate = ({route, navigation}) => {
               </Text>
               <Text style={styles.text42}>
                 This process might takes {"\n"}some minutes. Please Wait ...
+              </Text>
+              <Text style={styles.text42}>
+                You will be redirected to Transaction {"\n"}page in {timer} seconds...
               </Text>
             </View>
           </ImageBackground>

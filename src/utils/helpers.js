@@ -1,5 +1,4 @@
 export const stateConditionString = state => {
-    console.log('isLoading :',state.isLoading)
     let navigateTo = '';
     if (state.isLoading) {
         navigateTo = 'LOAD_APP';

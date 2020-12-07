@@ -2,3 +2,6 @@
 [1125/232453.339:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1201/084055.890:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1204/073237.997:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1205/073238.000:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1207/091627.963:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1207/141406.272:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\diasp\AppData\Local\Google\Chrome\User Data\Crashpad\attachments\bbabff23-e3f0-4f3c-b189-3f13ae8b5466: The system cannot find the path specified. (0x3)

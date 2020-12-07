@@ -1,0 +1,300 @@
+import React, { Component,useState,useEffect } from "react";
+import { StyleSheet, View, StatusBar, Text, Switch, Image,Button } from "react-native";
+import HeaderNoIcon from "../../components/HeaderNoIcon";
+import Svg, { Ellipse } from "react-native-svg";
+import IoniconsIcon from "react-native-vector-icons/Ionicons";
+
+import ferifeImage from  '../../assets/images/user_pic/ferife.jpg';
+import kohirImage from  '../../assets/images/user_pic/kohir.jpg';
+import anonymousImage from  '../../assets/images/user_pic/anonymous.jpg';
+import dakochan from  '../../assets/images/Dakochan.png';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {  GetSession, GetToken } from '../../utils/actions';
+
+import QRCode from 'react-native-qrcode-svg';
+
+export default Profile = ({route, navigation}) => {
+   const [userData, setUserData] = useState({}); 
+
+   useEffect(() => {
+ 
+    // Fetch the token from storage then navigate to our appropriate place
+
+    const bootstrapAsync = async () => {
+      try {
+        sessionJson = await GetSession()
+        session = await JSON.parse(sessionJson)        
+        if(session !== null){
+          setUserData(session)
+        }
+      } catch (e) {
+        // Restoring token failed
+        console.log('error restore token profile: ', e)
+      }
+      //dispatch({type: 'RESTORE_TOKEN', token: userToken});
+      
+
+    };
+    bootstrapAsync();
+  }, []);
+  return (
+    <View style={styles.root}>
+      <StatusBar barStyle="light-content" backgroundColor="rgba(0,0,0,0)" />
+      <HeaderNoIcon icon2Name="power" style={styles.headerX} navigation={navigation}></HeaderNoIcon>
+      <View style={styles.body}>
+        <View style={styles.ellipseStack}>
+          <Svg viewBox="0 0 859.43 890.3" style={styles.ellipse}>
+            <Ellipse
+              strokeWidth={1}
+              fill="rgba(255,255,255,1)"
+              cx={400}
+              cy={445}
+              rx={445}
+              ry={445}
+            ></Ellipse>
+          </Svg>
+          <View style={styles.settingsList}>
+            <View style={styles.accountSettings}>
+              <Text style={styles.expanded}>Profile</Text>
+              <View style={styles.subSettings}>
+                <View style={styles.editProfile}>
+                  <Text style={styles.text10}>Full Name</Text>
+                  <View style={styles.text10Filler}></View>
+                  <Text style={styles.text10}>{userData.firstName} {userData.lastName}</Text>
+                </View>
+                <View style={styles.text10Filler}></View>
+                <Text style={styles.expanded}>Zoa Adress</Text>
+                <View style={styles.changeConnections}>
+                  <Text style={styles.changeData}>{userData ? userData.Zoa && userData.Zoa.address:"Loading..."}</Text>
+                  <View style={styles.changeDataFiller}></View>
+                </View>
+
+
+                <View style={styles.text10Filler}></View>
+                <Text style={styles.expanded}>QR Code</Text>
+                <View style={styles.Qr}>
+                  <QRCode style={styles.Qr}
+                    value={userData ? userData.Zoa && userData.Zoa.address:""}
+                    size={200}
+                    logo={dakochan} 
+                    logoSize={100}
+                    logoMargin={3}
+                    logoBackgroundColor='transparent'
+                    color='#1f78cc'
+                    />
+                  <View style={styles.changeDataFiller}></View>
+                </View>
+                <View style={styles.changeDataFiller}></View>
+              </View>
+            </View>
+          </View>
+          <View style={styles.userInfo}>
+            <View style={styles.avatarRow}>
+              <Image
+               source={(userData.username =='kohir')? kohirImage :(userData.username =='ferife') ?ferifeImage:anonymousImage}
+                resizeMode="stretch"
+                style={styles.avatar}
+              ></Image>
+              <View style={styles.useremailDomainComStack}>
+                <Text style={styles.useremailDomainCom}>
+                  {userData.userEmail}
+                </Text>
+                <Text style={styles.userName}>{userData.username}</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+    backgroundColor: "rgb(255,255,255)"
+  },
+  headerX: {
+    height: 80,
+    elevation: 15,
+    shadowOffset: {
+      height: 7,
+      width: 1
+    },
+    shadowColor: "rgba(0,0,0,1)",
+    shadowOpacity: 0.1,
+    shadowRadius: 5
+  },
+  body: {
+    backgroundColor: "rgba(31,120,204,1)",
+    width: 360,
+    flex: 1
+  },
+  ellipse: {
+    top: 9,
+    left: 0,
+    width: 859,
+    height: 890,
+    position: "absolute"
+  },
+  settingsList: {
+    left: 51,
+    height: 409,
+    position: "absolute",
+    right: 450,
+    bottom: 272
+  },
+  accountSettings: {
+    height: 165,
+    marginTop: 15,
+    marginLeft: 24,
+    marginRight: 24
+  },
+  expanded: {
+    color: "#121212",
+    fontSize: 18,
+    marginTop: -3
+  },
+  subSettings: {
+    height: 118,
+    marginTop: 9
+  },
+  editProfile: {
+    height: 30,
+    flexDirection: "row",
+    marginLeft: 10,
+    marginRight: 10
+  },
+  text10: {
+    color: "rgba(0,0,0,1)",
+    fontSize: 16,
+    marginTop: 6
+  },
+  text10Filler: {
+    flex: 1,
+    flexDirection: "row"
+  },
+  icon: {
+    color: "rgba(31,178,204,1)",
+    fontSize: 30
+  },
+  changeConnections: {
+    height: 30,
+    flexDirection: "row",
+    marginTop: 11,
+    marginLeft: 10,
+    marginRight: 10
+  },
+  changeData: {
+    color: "rgba(0,0,0,1)",
+    fontSize: 16,
+    marginTop: 6
+  },
+  changeDataFiller: {
+    flex: 1,
+    flexDirection: "row"
+  },
+  icon2: {
+    color: "rgba(31,178,204,1)",
+    fontSize: 30
+  },
+  sub2: {
+    height: 186,
+    marginTop: 18,
+    marginLeft: 29,
+    marginRight: 29
+  },
+  notifications: {
+    height: 27,
+    alignSelf: "center",
+    flexDirection: "row"
+  },
+  text7: {
+    color: "#121212",
+    fontSize: 18
+  },
+  text7Filler: {
+    flex: 1,
+    flexDirection: "row"
+  },
+  switch3: {
+    width: 40
+  },
+  backup: {
+    height: 27,
+    alignSelf: "center",
+    flexDirection: "row",
+    marginTop: 53
+  },
+  text72: {
+    color: "#121212",
+    fontSize: 18
+  },
+  text72Filler: {
+    flex: 1,
+    flexDirection: "row"
+  },
+  switch2: {
+    width: 40,
+    marginRight: -2
+  },
+  pageName: {
+    top: 0,
+    left: 85,
+    color: "rgba(255,255,255,1)",
+    position: "absolute",
+    fontSize: 24
+  },
+  userInfo: {
+    top: 20,
+    left: 130,
+    height: 125,
+    position: "absolute",
+    right: 451,
+    flexDirection: "row"
+  },
+  avatar: {
+    width: 100,
+    height: 100,
+    borderRadius: 100
+  },
+  useremailDomainCom: {
+    top: 75,
+    left: 0,
+    color: "rgba(0,0,0,1)",
+    position: "absolute",
+    fontSize: 16
+  },
+  userName: {
+    top: 0,
+    left: 0,
+    color: "#1fb2cc",
+    position: "absolute",
+    fontSize: 30
+  },
+  useremailDomainComStack: {
+    width: 171,
+    height: 97,
+    marginLeft: 25,
+    marginTop: 10
+  },
+  avatarRow: {
+    height: 110,
+    flexDirection: "row",
+    flex: 1,
+    marginRight: 25
+  },
+  ellipseStack: {
+    height: 820,
+    marginTop: 34,
+    marginLeft: -50,
+    marginRight: -449
+  },
+  Qr :{
+    alignSelf:"center",
+    flexDirection: "row",
+    marginTop: 40,
+    marginLeft: 60,
+    marginRight: 10
+  }
+});

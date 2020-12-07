@@ -1,41 +1,20 @@
-import React, { useEffect ,Component,useContext } from "react";
-import { StyleSheet, View, TouchableOpacity,Text, Alert } from "react-native";
+import React, { useEffect ,Component,useContext,useState } from "react";
+import { StyleSheet, View, TouchableOpacity,Text, SafeAreaView } from "react-native";
 import { Container, Header, Left, Body, Right, Button, Title } from 'native-base';
 import {Badge, WithBadge} from 'react-native-elements';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
-import { NavigationContainer } from '@react-navigation/native';
 import { AppLoading} from "expo";
 import * as Font from 'expo-font';
 import {AuthContext} from '.../../utils/authContext';
 
 
-export default HeaderX = ({navigation}) => {
-  
-const {signOut} = useContext(AuthContext);
-  const handleLogout = () => {
-    console.log('handle logout');
-    signOut();
-  }
-  const ConfirmLogout = () =>
-      Alert.alert(
-        "Logout",
-        "Are You Sure Want to log out?",
-        [
-          {
-            text: "No",
-            onPress: () => console.log("No Pressed"),
-            style: "cancel"
-          },
-          { text: "Yes", onPress: () => handleLogout() }
-        ],
-        { cancelable: false }
-      );
+export default HeaderX = (props) => {
+  const {signOut,toggleDrawer} = useContext(AuthContext);
 
 
   useEffect(() => {
       // Fetch the token from storage then navigate to our appropriate place
-
       loadResourcesAsync = async () =>{
         await Promise.all([
           Font.loadAsync({
@@ -45,20 +24,16 @@ const {signOut} = useContext(AuthContext);
           })
         ]);
       }
-
-
-
       loadResourcesAsync();
       
     }, []);
 
-
-    
-
+  
   return (
+         
         <Header style={[styles.container]}>
           <Left style={styles.group}>
-            <Button transparent>
+            <Button transparent onPress={()=> props.navigation.openDrawer()}>
               <Icon name={"dehaze"} style={styles.icon3}></Icon>
             </Button>
           </Left>
@@ -66,9 +41,6 @@ const {signOut} = useContext(AuthContext);
             <Title style={styles.logoHeader}>Dacochan</Title>
           </Body>
           <Right>
-           <Button transparent>
-             <MaterialCommunityIcons name="logout" style={styles.icon3} onPress={ConfirmLogout}/>
-            </Button>
             <Button transparent>
             <Icon name={ "notifications"} style={styles.icon3}>
             </Icon>
@@ -113,6 +85,9 @@ const styles = StyleSheet.create({
     color: "rgba(250,250,250,1)",
     fontSize: 25
   },
+  safeArea :{
+    marginTop:10
+  }
 });
 
 

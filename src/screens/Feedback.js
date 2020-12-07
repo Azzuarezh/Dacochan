@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { StyleSheet, View, StatusBar, Text, TextInput } from "react-native";
-import HeaderX from "../components/HeaderX";
+import HeaderNoIcon from "../components/HeaderNoIcon";
 import EvilIconsIcon from "react-native-vector-icons/EvilIcons";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import IoniconsIcon from "react-native-vector-icons/Ionicons";
 import MapView from "react-native-maps";
 
-function Feedback(props) {
+export default Feedback = ({route,navigation})=> {
   return (
     <View style={styles.root}>
       <StatusBar barStyle="light-content" backgroundColor="rgba(0,0,0,0)" />
-      <HeaderX style={styles.headerX}></HeaderX>
+      <HeaderNoIcon style={styles.headerX} navigation={navigation}></HeaderNoIcon>
       <View style={styles.body}>
         <View style={styles.feedbackBox}>
           <View style={styles.text4Column}>
@@ -21,7 +21,7 @@ function Feedback(props) {
             <View style={styles.form}>
               <View style={styles.name}>
                 <EvilIconsIcon
-                  name={props.iconName || "user"}
+                  name={ "user"}
                   style={styles.icon3}
                 ></EvilIconsIcon>
                 <TextInput
@@ -33,7 +33,8 @@ function Feedback(props) {
               <View style={styles.nameFiller}></View>
               <View style={styles.email}>
                 <FontAwesomeIcon
-                  name={props.iconName || "envelope-o"}
+                  name={
+                    "envelope-o"}
                   style={styles.icon4}
                 ></FontAwesomeIcon>
                 <TextInput
@@ -59,176 +60,6 @@ function Feedback(props) {
             </View>
           </View>
         </View>
-        <MapView
-          provider={MapView.PROVIDER_GOOGLE}
-          initialRegion={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421
-          }}
-          customMapStyle={[
-            {
-              elementType: "geometry",
-              stylers: [
-                {
-                  color: "#f5f5f5"
-                }
-              ]
-            },
-            {
-              elementType: "labels.icon",
-              stylers: [
-                {
-                  visibility: "off"
-                }
-              ]
-            },
-            {
-              elementType: "labels.text.fill",
-              stylers: [
-                {
-                  color: "#616161"
-                }
-              ]
-            },
-            {
-              elementType: "labels.text.stroke",
-              stylers: [
-                {
-                  color: "#f5f5f5"
-                }
-              ]
-            },
-            {
-              featureType: "administrative.land_parcel",
-              elementType: "labels.text.fill",
-              stylers: [
-                {
-                  color: "#bdbdbd"
-                }
-              ]
-            },
-            {
-              featureType: "poi",
-              elementType: "geometry",
-              stylers: [
-                {
-                  color: "#eeeeee"
-                }
-              ]
-            },
-            {
-              featureType: "poi",
-              elementType: "labels.text.fill",
-              stylers: [
-                {
-                  color: "#757575"
-                }
-              ]
-            },
-            {
-              featureType: "poi.park",
-              elementType: "geometry",
-              stylers: [
-                {
-                  color: "#e5e5e5"
-                }
-              ]
-            },
-            {
-              featureType: "poi.park",
-              elementType: "labels.text.fill",
-              stylers: [
-                {
-                  color: "#9e9e9e"
-                }
-              ]
-            },
-            {
-              featureType: "road",
-              elementType: "geometry",
-              stylers: [
-                {
-                  color: "#ffffff"
-                }
-              ]
-            },
-            {
-              featureType: "road.arterial",
-              elementType: "labels.text.fill",
-              stylers: [
-                {
-                  color: "#757575"
-                }
-              ]
-            },
-            {
-              featureType: "road.highway",
-              elementType: "geometry",
-              stylers: [
-                {
-                  color: "#dadada"
-                }
-              ]
-            },
-            {
-              featureType: "road.highway",
-              elementType: "labels.text.fill",
-              stylers: [
-                {
-                  color: "#616161"
-                }
-              ]
-            },
-            {
-              featureType: "road.local",
-              elementType: "labels.text.fill",
-              stylers: [
-                {
-                  color: "#9e9e9e"
-                }
-              ]
-            },
-            {
-              featureType: "transit.line",
-              elementType: "geometry",
-              stylers: [
-                {
-                  color: "#e5e5e5"
-                }
-              ]
-            },
-            {
-              featureType: "transit.station",
-              elementType: "geometry",
-              stylers: [
-                {
-                  color: "#eeeeee"
-                }
-              ]
-            },
-            {
-              featureType: "water",
-              elementType: "geometry",
-              stylers: [
-                {
-                  color: "#c9c9c9"
-                }
-              ]
-            },
-            {
-              featureType: "water",
-              elementType: "labels.text.fill",
-              stylers: [
-                {
-                  color: "#9e9e9e"
-                }
-              ]
-            }
-          ]}
-          style={styles.map}
-        ></MapView>
       </View>
     </View>
   );
@@ -361,4 +192,3 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Feedback;

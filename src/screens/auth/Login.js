@@ -51,7 +51,7 @@ import { AuthContext } from '../../utils/authContext';
     const handleSignIn = () => {
           // https://indicative.adonisjs.com
           const rules = {
-              username : 'required',
+              username : 'required|alpha_numeric',
               password: 'required|string|min:6|max:40'
           };
 
@@ -62,8 +62,8 @@ import { AuthContext } from '../../utils/authContext';
 
           const messages = {
               required: field => `${field} is required`,
-              'username.alpha': 'Username contains unallowed characters',
-              'password.min': 'Wrong Password?'
+              'username.alpha_numeric': 'Username contains unallowed characters',
+              'password.min': 'password must contains min 6 characters.'
           };
 
           validateAll(data, rules, messages)
@@ -77,6 +77,11 @@ import { AuthContext } from '../../utils/authContext';
                       formatError[err.field] = err.message;
                   });
                   setSignInErrors(formatError);
+                  Toast.show({
+                text: formatError[Object.keys(formatError)[0]],
+                buttonText: "Ok",
+                type: "danger"
+              })
               });
       };
 
@@ -110,7 +115,6 @@ import { AuthContext } from '../../utils/authContext';
                         secureTextEntry={false}
                         style={styles.usernameInput}
                         value={userName} onChangeText={setUserName}
-                        errorMessage={SignInErrors ? SignInErrors.username : null}
                         errorStyle={{ color: 'red' }}
                       />
                     </View>
@@ -124,8 +128,6 @@ import { AuthContext } from '../../utils/authContext';
                         placeholderTextColor="rgba(255,255,255,1)"
                         style={styles.usernameInput}
                         value={password} onChangeText={setPassword} secureTextEntry
-                        errorMessage={SignInErrors ? SignInErrors.password : null}
-                        errorStyle={{ color: 'red' }}
                       />
                     </View>
                   </View>

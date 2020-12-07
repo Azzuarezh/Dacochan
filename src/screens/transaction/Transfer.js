@@ -13,29 +13,12 @@ import ScanQRCode from "./ScanQRCode";
 
 export default Transfer = ({route,navigation}) =>{
 const {  address } = route.params;
- useEffect(() => {
-    // Fetch the token from storage then navigate to our appropriate place
 
-    loadResourcesAsync = async () =>{
-      await Promise.all([
-        Font.loadAsync({
-          "roboto-regular": require("../../assets/fonts/roboto-regular.ttf"),
-          "baumans-regular": require("../../assets/fonts/baumans-regular.ttf"),
-          "alegreya-sans-sc-700": require("../../assets/fonts/alegreya-sans-sc-700.ttf")
-        })
-      ]);
-    }
-
-
-
-    loadResourcesAsync();
-     
-  }, []);
 
   return (
     <View style={styles.root}>
       <StatusBar barStyle="light-content" backgroundColor="rgba(0,0,0,0)" />
-      <HeaderNoIcon style={styles.headerX}></HeaderNoIcon>
+      <HeaderNoIcon style={styles.headerX} navigation={navigation}></HeaderNoIcon>
       <View gradientImage="Gradient_xjVvfkX.png" style={styles.body}>
         <View style={styles.background}>
           <ImageBackground
@@ -90,6 +73,7 @@ const {  address } = route.params;
               <IoniconsIcon
                 name="md-arrow-forward"
                 style={styles.icon5}
+                onPress={() => navigation.navigate('PreProcessLiquidate')}
               ></IoniconsIcon>
             </View>
           </View>
